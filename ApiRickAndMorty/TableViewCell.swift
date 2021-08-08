@@ -24,9 +24,6 @@ class TableViewCell: UITableViewCell {
                 guard let imageData = try? Data(contentsOf: url) else {return}
                 DispatchQueue.main.async {
                     self.characterImage.image = UIImage(data: imageData)
-                
             }
-            
         }
-    
 }

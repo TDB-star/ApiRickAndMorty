@@ -8,7 +8,7 @@
 import Foundation
 
 protocol CharacterLoaderDelegate {
-    func characterLoader(characteries: [Character])
+    func characterLoader(loadCharacters: [Character])
 }
 
 class CharactersLoader {
@@ -24,11 +24,11 @@ class CharactersLoader {
                 return
             }
             do {
-                let character = try JSONDecoder().decode([Character].self, from: data)
+                let characters = try JSONDecoder().decode([Character].self, from: data)
                 DispatchQueue.main.async {
-                    self.delegate?.characterLoader(characteries: character)
+                    self.delegate?.characterLoader(loadCharacters: characters)
                 }
-                print(character)
+                print(characters)
             } catch let error {
                 print(error.localizedDescription)
             }

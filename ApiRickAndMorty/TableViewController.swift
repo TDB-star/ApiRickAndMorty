@@ -9,7 +9,7 @@ import UIKit
 
 class TableViewController: UITableViewController {
     
-    private var characteres: [Character] = []
+    private var characters: [Character] = []
     
     let loader = CharactersLoader()
     
@@ -23,24 +23,25 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return characteres.count
+        return characters.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
-        let character = characteres[indexPath.row]
+        let character = characters[indexPath.row]
         cell.configureCell(with: character)
         return cell
     }
 }
 
 extension TableViewController: CharacterLoaderDelegate {
-    func characterLoader(characteries: [Character]) {
-        self.characteres = characteries
+    func characterLoader(loadCharacters: [Character]) {
+        self.characters = loadCharacters
         tableView.reloadData()
     }
 }
 
+// Метод до использования протокола ;)
 //extension TableViewController {
 //
 //    func loadCharacters() {
