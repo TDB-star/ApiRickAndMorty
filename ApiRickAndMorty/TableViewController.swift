@@ -9,37 +9,49 @@ import UIKit
 
 class TableViewController: UITableViewController {
     
-    private var characters: [Character] = []
+    //private var characters: [Character] = []
+    private var rickAndMorty: RickAndMorty?
     
-    let loader = CharactersLoader()
+    //let loader = CharactersLoader()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loader.delegate = self
-        loader.loadCharacters()
-            
+//        loader.delegate = self
+//        loader.loadCharacters()
+//
+        CharactersLoader.shared.fetchRequest { rickAndMorty in
+            self.rickAndMorty = rickAndMorty
+            self.tableView.reloadData()
+        }
         tableView.rowHeight = 135
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return characters.count
+        return rickAndMorty?.results.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
-        let character = characters[indexPath.row]
-        cell.configureCell(with: character)
+        let character = rickAndMorty?.results[indexPath.row]
+        cell.configureCell(with: character!)
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        let character = rickAndMorty?.results[indexPath.row]
+        let detailVC = segue.destination as! DetailViewController
+        detailVC.character = character
     }
 }
 
-extension TableViewController: CharacterLoaderDelegate {
-    func characterLoader(loadCharacters: [Character]) {
-        self.characters = loadCharacters
-        tableView.reloadData()
-    }
-}
+//extension TableViewController: CharacterLoaderDelegate {
+//    func characterLoader(loadCharacters: [Character]) {
+//        self.characters = loadCharacters
+//        tableView.reloadData()
+//    }
+//}
 
 // Метод до использования протокола ;)
 //extension TableViewController {
