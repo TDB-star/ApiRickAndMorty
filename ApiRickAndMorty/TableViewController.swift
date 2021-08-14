@@ -41,7 +41,7 @@ class TableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         let character = rickAndMorty?.results[indexPath.row]
-        let detailVC = segue.destination as! DetailViewController
+        let detailVC = segue.destination as! NewDetailTableViewController
         detailVC.character = character
     }
 }

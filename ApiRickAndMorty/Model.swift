@@ -28,20 +28,13 @@ struct Character: Codable {
     let type: String
     let gender: Gender
     let origin, location: Location
-    let image: String
+    let image: String?
     let episode: [String]
     let url: String
     let created: String
     
-    var description: String {
-        """
-    Name: \(name)
-    Status: \(status)
-    Species: \(species)
-    Gender: \(gender)
-    Origin: \(origin.name)
-    Location: \(location.name)
-    """
+    var speicesAndGender: String {
+        "\(species.rawValue)(\(gender.rawValue))"
     }
 }
 

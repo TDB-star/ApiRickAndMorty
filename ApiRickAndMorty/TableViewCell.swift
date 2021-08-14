@@ -18,12 +18,18 @@ class TableViewCell: UITableViewCell {
             characterNameLabel.text = model.name
             characterStatusLabel.text = model.status.rawValue
             CharacterLocationLabel.text = model.location.name
-    
-            guard let url = URL(string: model.image) else {return}
-        
-                guard let imageData = try? Data(contentsOf: url) else {return}
-                DispatchQueue.main.async {
+            
+            if let imageURL = model.image {
+                ImageManager.shared.getCharacterImage(from: imageURL) { imageData in
                     self.characterImage.image = UIImage(data: imageData)
+                }
             }
+    
+//            guard let url = URL(string: model.image) else {return}
+//
+//                guard let imageData = try? Data(contentsOf: url) else {return}
+//                DispatchQueue.main.async {
+//                    self.characterImage.image = UIImage(data: imageData)
+//            }
         }
 }

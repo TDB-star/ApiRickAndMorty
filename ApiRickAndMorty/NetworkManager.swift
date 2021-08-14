@@ -8,10 +8,23 @@
 import Alamofire
 
 class ImageManager {
+    
     static var shared = ImageManager()
     
     private init() {}
     
+    func getCharacterImage(from url: String, completion: @escaping (Data) -> Void){
+        AF.request(url)
+            .validate()
+            .responseData { response in
+                switch response.result {
+                case . success(let imageData):
+                    completion(imageData)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
     func fetchImage(from url: String?) -> Data? {
         guard let stringURL = url else { return nil }
         guard let imageURL = URL(string: stringURL) else { return nil }
