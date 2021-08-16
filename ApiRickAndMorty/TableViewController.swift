@@ -11,6 +11,7 @@ class TableViewController: UITableViewController {
     
     //private var characters: [Character] = []
     private var rickAndMorty: RickAndMorty?
+    private var episode: Welcome?
     
     //let loader = CharactersLoader()
     
@@ -20,8 +21,14 @@ class TableViewController: UITableViewController {
 //        loader.delegate = self
 //        loader.loadCharacters()
 //
-        CharactersLoader.shared.fetchRequest { rickAndMorty in
-            self.rickAndMorty = rickAndMorty
+//        CharactersLoader.shared.fetchRequest { rickAndMorty in
+//            self.rickAndMorty = rickAndMorty
+//            self.tableView.reloadData()
+//        }
+//
+        fetchData(from: URLS.rickAndMortyapiCharacter.rawValue)
+        CharactersLoader.shared.getEpisode { episode in
+            self.episode = episode
             self.tableView.reloadData()
         }
         tableView.rowHeight = 135
@@ -41,8 +48,21 @@ class TableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         let character = rickAndMorty?.results[indexPath.row]
+        let episodes = episode?.results[indexPath.row]
         let detailVC = segue.destination as! NewDetailTableViewController
         detailVC.character = character
+        detailVC.episode = episodes
+    }
+    
+    @IBAction func updateData(_ sender: UIBarButtonItem) {
+        sender.tag == 1 ? fetchData(from: rickAndMorty?.info.next) : fetchData(from: rickAndMorty?.info.prev)
+    }
+    
+    private func fetchData(from url: String?) {
+        CharactersLoader.shared.fetchRequest(from: url) { rickAndMorty in
+            self.rickAndMorty = rickAndMorty
+            self.tableView.reloadData()
+        }
     }
 }
 

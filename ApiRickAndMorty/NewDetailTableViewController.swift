@@ -10,6 +10,8 @@ import UIKit
 class NewDetailTableViewController: UITableViewController {
     
     var character: Character!
+    var episode: Result!
+    //var episode: Episode?
     
     @IBOutlet weak var characterImageView: UIImageView!
     
@@ -17,10 +19,13 @@ class NewDetailTableViewController: UITableViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var speicesAndGenderLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var episodesLabel: UILabel!
+    @IBOutlet weak var episodeNumber: UILabel!
+    @IBOutlet weak var firstSeenEpisodeLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.tableFooterView = UIView()
         
         if let topItem = navigationController?.navigationBar.topItem {
@@ -28,7 +33,6 @@ class NewDetailTableViewController: UITableViewController {
         }
         title = character.name
         setCharactersDetails(with: character)
-        
     }
    
     private func setCharactersDetails(with model: Character) {
@@ -43,6 +47,10 @@ class NewDetailTableViewController: UITableViewController {
         nameLabel.text = character.name
         speicesAndGenderLabel.text = character.speicesAndGender
         locationLabel.text = character.location.name
+        episodesLabel.text = episode.name
+        firstSeenEpisodeLabel.text = episode.name
+        episodeNumber.text = episode.episode
+        
         
     }
 }

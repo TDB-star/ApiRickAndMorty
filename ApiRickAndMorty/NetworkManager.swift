@@ -40,16 +40,30 @@ class CharactersLoader {
 
     //var delegate: CharacterLoaderDelegate?
     
-    func fetchRequest(with complition: @escaping (RickAndMorty) -> Void) {
-        guard let url = URL(string: "https://rickandmortyapi.com/api/character") else {return}
-        AF.request(url).responseDecodable(of: RickAndMorty.self  ) { (response) in guard
-            let rickAndMorty = response.value else {return}
+    func fetchRequest(from url: String?, with completion: @escaping (RickAndMorty) -> Void) {
+        guard let stringUrl = url else {return}
+        AF.request(stringUrl).responseDecodable(of: RickAndMorty.self  ) { response in guard
+            let rickAndMorty = response.value else { return }
+            
             DispatchQueue.main.async {
-                complition(rickAndMorty)
+                completion(rickAndMorty)
             }
             print(rickAndMorty)
         }
     }
+    
+    func getEpisode(with completion: @escaping (Welcome) -> Void) {
+        guard let url = URL(string: "https://rickandmortyapi.com/api/episode") else { return }
+        AF.request(url).responseDecodable(of: Welcome.self) { response in
+            guard let episode = response.value else { return }
+            DispatchQueue.main.async {
+                completion(episode)
+            }
+            print(episode)
+        }
+    }
+    
+    
     /* func loadCharacters() {
          guard let url = URL(string: "https://rickandmortyapi.com/api/character/1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20") else {return}
          let request = URLRequest(url: url)
@@ -71,6 +85,8 @@ class CharactersLoader {
          .resume()
      }*/
 }
+
+
 
 /*protocol CharacterLoaderDelegate {
     func characterLoader(loadCharacters: [Character])
