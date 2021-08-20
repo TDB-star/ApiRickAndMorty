@@ -11,7 +11,6 @@ class NewDetailTableViewController: UITableViewController {
     
     var character: Character!
     var episode: Result!
-    //var episode: Episode?
     
     @IBOutlet weak var characterImageView: UIImageView!
     

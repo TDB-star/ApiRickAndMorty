@@ -8,28 +8,23 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var characterImage: UIImageView!
     @IBOutlet weak var characterNameLabel: UILabel!
     @IBOutlet weak var characterStatusLabel: UILabel!
     @IBOutlet weak var CharacterLocationLabel: UILabel!
     
-        func configureCell(with model: Character) {
-            characterNameLabel.text = model.name
-            characterStatusLabel.text = model.status.rawValue
-            CharacterLocationLabel.text = model.location.name
-            
+    func configureCell(with model: Character) {
+        characterNameLabel.text = model.name
+        characterStatusLabel.text = model.status.rawValue
+        CharacterLocationLabel.text = model.location.name
+    
             if let imageURL = model.image {
                 ImageManager.shared.getCharacterImage(from: imageURL) { imageData in
-                    self.characterImage.image = UIImage(data: imageData)
+                    DispatchQueue.main.async {
+                        self.characterImage.image = UIImage(data: imageData)
+                    }
                 }
-            }
-    
-//            guard let url = URL(string: model.image) else {return}
-//
-//                guard let imageData = try? Data(contentsOf: url) else {return}
-//                DispatchQueue.main.async {
-//                    self.characterImage.image = UIImage(data: imageData)
-//            }
         }
+    }
 }

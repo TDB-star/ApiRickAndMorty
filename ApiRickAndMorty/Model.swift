@@ -7,6 +7,7 @@
 
 
 // MARK: - RickAndMorty
+
 struct RickAndMorty: Codable {
     let info: Info
     let results: [Character]
@@ -14,8 +15,9 @@ struct RickAndMorty: Codable {
 
 // MARK: - Info
 struct Info: Codable {
+    let count: Int
     let pages: Int
-    let next: String?
+    let next: String
     let prev: String?
 }
 
@@ -83,22 +85,6 @@ struct Result: Codable {
 enum URLS: String {
     case rickAndMortyapiCharacter = "https://rickandmortyapi.com/api/character"
     case rickAndMortyapiEpisode = "https://rickandmortyapi.com/api/episode"
+    case rickAndMortyapiPages = "https://rickandmortyapi.com/api/character/?page"
 }
 
-
-// Эту структуру я испльзовала для метода с делегированием
-
-//struct Character: Codable {
-//    let name: String
-//    let status: String
-//    let species: String
-//    let type: String
-//    let gender: String
-//    let location: Location
-//    let image: String
-//}
-//
-//struct Location: Codable {
-//    let name: String
-//    let url: String
-//}

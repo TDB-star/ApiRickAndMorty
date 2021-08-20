@@ -9,28 +9,24 @@ import UIKit
 
 class TableViewController: UITableViewController {
     
-    //private var characters: [Character] = []
     private var rickAndMorty: RickAndMorty?
     private var episode: Welcome?
+    private var page: Info?
     
-    //let loader = CharactersLoader()
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        loader.delegate = self
-//        loader.loadCharacters()
-//
-//        CharactersLoader.shared.fetchRequest { rickAndMorty in
-//            self.rickAndMorty = rickAndMorty
-//            self.tableView.reloadData()
-//        }
-//
         fetchData(from: URLS.rickAndMortyapiCharacter.rawValue)
+        
         CharactersLoader.shared.getEpisode { episode in
             self.episode = episode
             self.tableView.reloadData()
+            
         }
+        
+        
+        
         tableView.rowHeight = 135
     }
 
@@ -55,7 +51,9 @@ class TableViewController: UITableViewController {
     }
     
     @IBAction func updateData(_ sender: UIBarButtonItem) {
-        sender.tag == 1 ? fetchData(from: rickAndMorty?.info.next) : fetchData(from: rickAndMorty?.info.prev)
+        sender.tag == 1
+            ? fetchData(from: rickAndMorty?.info.next)
+            : fetchData(from: rickAndMorty?.info.prev)
     }
     
     private func fetchData(from url: String?) {
@@ -65,35 +63,3 @@ class TableViewController: UITableViewController {
         }
     }
 }
-
-//extension TableViewController: CharacterLoaderDelegate {
-//    func characterLoader(loadCharacters: [Character]) {
-//        self.characters = loadCharacters
-//        tableView.reloadData()
-//    }
-//}
-
-// Метод до использования протокола ;)
-//extension TableViewController {
-//
-//    func loadCharacters() {
-//        guard let url = URL(string: "https://rickandmortyapi.com/api/character/1,2,3,6,8,10,22,12,13,15") else {return}
-//        let request = URLRequest(url: url)
-//        URLSession.shared.dataTask(with: request) { data, _, error in
-//            guard let data = data else {
-//                print(error?.localizedDescription ?? " ")
-//                return
-//            }
-//            do {
-//                self.characteres = try JSONDecoder().decode([Character].self, from: data)
-//                    DispatchQueue.main.async {
-//                        self.tableView.reloadData()
-//                }
-//                //print(self.characteres)
-//            } catch let error {
-//                print(error.localizedDescription)
-//            }
-//        }
-//        .resume()
-//    }
-//}
