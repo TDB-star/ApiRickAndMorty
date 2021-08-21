@@ -16,7 +16,7 @@ class TableViewCell: UITableViewCell {
     
     func configureCell(with model: Character) {
         characterNameLabel.text = model.name
-        characterStatusLabel.text = model.status.rawValue
+        characterStatusLabel.text = model.status
         CharacterLocationLabel.text = model.location.name
     
             if let imageURL = model.image {
@@ -27,4 +27,5 @@ class TableViewCell: UITableViewCell {
                 }
         }
     }
+    
 }

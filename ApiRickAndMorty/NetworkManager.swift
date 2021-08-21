@@ -33,7 +33,6 @@ class CharactersLoader {
     
     private init() {}
 
-    
     func fetchRequest(from url: String?, with completion: @escaping (RickAndMorty) -> Void) {
         guard let stringUrl = url else {return}
         AF.request(stringUrl).responseDecodable(of: RickAndMorty.self  ) { response in guard
