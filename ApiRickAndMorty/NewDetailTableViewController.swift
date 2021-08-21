@@ -11,7 +11,6 @@ class NewDetailTableViewController: UITableViewController {
     
     var character: Character!
     var episode: Result!
-    //var episode: Episode?
     
     @IBOutlet weak var characterImageView: UIImageView!
     
@@ -43,7 +42,7 @@ class NewDetailTableViewController: UITableViewController {
                 }
             }
         }
-        liveStatusLabel.text = character.status.rawValue
+        liveStatusLabel.text = character.status
         nameLabel.text = character.name
         speicesAndGenderLabel.text = character.speicesAndGender
         locationLabel.text = character.location.name

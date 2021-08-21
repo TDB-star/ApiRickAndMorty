@@ -25,11 +25,6 @@ class ImageManager {
                 }
             }
     }
-    func fetchImage(from url: String?) -> Data? {
-        guard let stringURL = url else { return nil }
-        guard let imageURL = URL(string: stringURL) else { return nil }
-        return try? Data(contentsOf: imageURL)
-    }
 }
 
 class CharactersLoader {
@@ -38,8 +33,6 @@ class CharactersLoader {
     
     private init() {}
 
-    //var delegate: CharacterLoaderDelegate?
-    
     func fetchRequest(from url: String?, with completion: @escaping (RickAndMorty) -> Void) {
         guard let stringUrl = url else {return}
         AF.request(stringUrl).responseDecodable(of: RickAndMorty.self  ) { response in guard
@@ -62,32 +55,5 @@ class CharactersLoader {
             print(episode)
         }
     }
-    
-    
-    /* func loadCharacters() {
-         guard let url = URL(string: "https://rickandmortyapi.com/api/character/1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20") else {return}
-         let request = URLRequest(url: url)
-         URLSession.shared.dataTask(with: request) { data, _, error in
-             guard let data = data else {
-                 print(error?.localizedDescription ?? " ")
-                 return
-             }
-             do {
-                 let characters = try JSONDecoder().decode([Character].self, from: data)
-                 DispatchQueue.main.async {
-                     self.delegate?.characterLoader(loadCharacters: characters)
-                 }
-                 print(characters)
-             } catch let error {
-                 print(error.localizedDescription)
-             }
-         }
-         .resume()
-     }*/
 }
 
-
-
-/*protocol CharacterLoaderDelegate {
-    func characterLoader(loadCharacters: [Character])
-}*/
