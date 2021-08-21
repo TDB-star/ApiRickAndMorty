@@ -22,8 +22,8 @@ class ImageManager {
                     completion(imageData)
                 case .failure(let error):
                     print(error)
-                }
             }
+        }
     }
 }
 
@@ -32,12 +32,11 @@ class CharactersLoader {
     static let shared = CharactersLoader()
     
     private init() {}
-
+    
     func fetchRequest(from url: String?, with completion: @escaping (RickAndMorty) -> Void) {
         guard let stringUrl = url else {return}
-        AF.request(stringUrl).responseDecodable(of: RickAndMorty.self  ) { response in guard
-            let rickAndMorty = response.value else { return }
-            
+        AF.request(stringUrl).responseDecodable(of: RickAndMorty.self  ) { response in
+            guard let rickAndMorty = response.value else {return}
             DispatchQueue.main.async {
                 completion(rickAndMorty)
             }
@@ -45,9 +44,9 @@ class CharactersLoader {
         }
     }
     
-    func getEpisode(with completion: @escaping (Welcome) -> Void) {
-        guard let url = URL(string: "https://rickandmortyapi.com/api/episode") else { return }
-        AF.request(url).responseDecodable(of: Welcome.self) { response in
+    func getEpisode(from url: String?, with completion: @escaping (Welcome) -> Void) {
+        guard let stringUrl = url else { return }
+        AF.request(stringUrl).responseDecodable(of: Welcome.self) { response in
             guard let episode = response.value else { return }
             DispatchQueue.main.async {
                 completion(episode)
@@ -56,4 +55,3 @@ class CharactersLoader {
         }
     }
 }
-

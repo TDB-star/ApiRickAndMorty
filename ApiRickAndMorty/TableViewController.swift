@@ -19,14 +19,10 @@ class TableViewController: UITableViewController {
         
         fetchData(from: URLS.rickAndMortyapiCharacter.rawValue)
         
-        CharactersLoader.shared.getEpisode { episode in
+        CharactersLoader.shared.getEpisode(from: URLS.rickAndMortyapiEpisode.rawValue) { episode in
             self.episode = episode
             self.tableView.reloadData()
-            
         }
-        
-        
-        
         tableView.rowHeight = 135
     }
 

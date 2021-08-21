@@ -52,17 +52,6 @@ struct Location: Codable {
     let url: String
 }
 
-enum Species: String, Codable {
-    case alien = "Alien"
-    case human = "Human"
-}
-
-enum Status: String, Codable {
-    case alive = "Alive"
-    case dead = "Dead"
-    case unknown = "unknown"
-}
-
 // MARK: - Welcome
 struct Welcome: Codable {
     let results: [Result]
@@ -83,7 +72,6 @@ struct Result: Codable {
 }
 
 enum URLS: String {
-    
     case rickAndMortyapiCharacter = "https://rickandmortyapi.com/api/character"
     case rickAndMortyapiEpisode = "https://rickandmortyapi.com/api/episode"
 }
