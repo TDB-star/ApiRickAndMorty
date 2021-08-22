@@ -54,4 +54,15 @@ class CharactersLoader {
             print(episode)
         }
     }
+    
+    func getEpisodeName(from url: String?, with completion: @escaping (Result) -> Void) {
+        guard let stringUrl = url else { return }
+        AF.request(stringUrl).responseDecodable(of: Result.self) { response in
+            guard let episode = response.value else { return }
+            DispatchQueue.main.async {
+                completion(episode)
+            }
+            print(episode)
+        }
+    }
 }

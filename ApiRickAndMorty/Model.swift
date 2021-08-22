@@ -54,6 +54,7 @@ struct Location: Codable {
 
 // MARK: - Welcome
 struct Welcome: Codable {
+    let info: Info
     let results: [Result]
 }
 // MARK: - Result

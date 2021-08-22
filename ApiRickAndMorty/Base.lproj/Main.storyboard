@@ -291,14 +291,14 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="l3Y-Sy-tvS">
                                                             <rect key="frame" x="0.0" y="33" width="382" height="21.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRX-Fb-dkx">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="21.5"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRX-Fb-dkx">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="186" height="21.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQz-SV-Ji5">
-                                                                    <rect key="frame" x="345" y="0.0" width="37" height="21.5"/>
+                                                                    <rect key="frame" x="196" y="0.0" width="186" height="21.5"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -323,7 +323,14 @@
                             <outlet property="delegate" destination="dFR-MM-3py" id="0iX-Ds-0WW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="61f-Pv-LNx"/>
+                    <navigationItem key="navigationItem" id="61f-Pv-LNx">
+                        <barButtonItem key="rightBarButtonItem" title="Episodes" id="n34-Nl-bAd">
+                            <connections>
+                                <action selector="episodesButtonTapped:" destination="dFR-MM-3py" id="VPX-m6-0kL"/>
+                                <segue destination="XBH-No-d1A" kind="presentation" id="PTH-ny-rbB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="characterImageView" destination="9X2-jD-v13" id="Rwd-rz-IG0"/>
                         <outlet property="episodeNumber" destination="CQz-SV-Ji5" id="ujF-Gi-lpM"/>
@@ -338,6 +345,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BmY-YY-hQg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1649" y="195"/>
+        </scene>
+        <!--Episodes-->
+        <scene sceneID="mvD-hk-86p">
+            <objects>
+                <tableViewController id="U7j-Mw-odR" customClass="EpisodesTableViewController" customModule="ApiRickAndMorty" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="RLA-HH-ItK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EpisodeCell" id="lEf-vG-Qj2">
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lEf-vG-Qj2" id="5gw-OL-F32">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="U7j-Mw-odR" id="ZCA-f7-g9q"/>
+                            <outlet property="delegate" destination="U7j-Mw-odR" id="upi-do-ziU"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Episodes" id="cPV-5B-Ewx"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="slP-de-Q5t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3371.0144927536235" y="194.86607142857142"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6ql-Ux-PjX">
@@ -356,6 +392,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1el-Gf-sBn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="76.811594202898561" y="194.86607142857142"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="RSi-Cf-ROs">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XBH-No-d1A" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3la-CF-w18">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="U7j-Mw-odR" kind="relationship" relationship="rootViewController" id="izY-7C-g9W"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4lc-JN-00B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2460.8695652173915" y="194.86607142857142"/>
         </scene>
     </scenes>
     <resources>
