@@ -6,6 +6,7 @@
 //
 
 import Alamofire
+import UIKit
 
 class ImageManager {
     
@@ -13,18 +14,34 @@ class ImageManager {
     
     private init() {}
     
-    func getCharacterImage(from url: String, completion: @escaping (Data) -> Void){
-        AF.request(url)
-            .validate()
-            .responseData { response in
-                switch response.result {
-                case . success(let imageData):
-                    completion(imageData)
-                case .failure(let error):
-                    print(error)
+   // URL session
+    func fetchImage(from url: URL, completion: @escaping (Data, URLResponse) -> Void){
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, let response = response else {
+                print(error?.localizedDescription ?? "No description")
+                return
+            }
+            guard url == response.url else { return }
+            
+            DispatchQueue.main.async {
+                completion(data, response)
             }
         }
+        .resume()
     }
+    
+//    func getCharacterImage(from url: String, completion: @escaping (Data) -> Void){
+//        AF.request(url)
+//            .validate()
+//            .responseData { response in
+//                switch response.result {
+//                case . success(let imageData):
+//                    completion(imageData)
+//                case .failure(let error):
+//                    print(error)
+//            }
+//        }
+//    }
 }
 
 class CharactersLoader {

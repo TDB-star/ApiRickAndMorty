@@ -12,7 +12,7 @@ class NewDetailTableViewController: UITableViewController {
     var character: Character!
     var episode: Result!
     
-    @IBOutlet weak var characterImageView: UIImageView!
+    @IBOutlet weak var characterImageView: CharacterImageView!
     
     @IBOutlet weak var liveStatusLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
@@ -35,13 +35,8 @@ class NewDetailTableViewController: UITableViewController {
     }
    
     private func setCharactersDetails(with model: Character) {
-        if let imageURL = model.image {
-            ImageManager.shared.getCharacterImage(from: imageURL) { imageData in
-                DispatchQueue.main.async {
-                    self.characterImageView.image = UIImage(data: imageData)
-                }
-            }
-        }
+
+        characterImageView.fetchImage(from: model.image ?? "")
         liveStatusLabel.text = character.status
         nameLabel.text = character.name
         speicesAndGenderLabel.text = character.speicesAndGender

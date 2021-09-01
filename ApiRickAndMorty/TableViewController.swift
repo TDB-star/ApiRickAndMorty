@@ -13,7 +13,6 @@ class TableViewController: UITableViewController {
     private var episode: Welcome?
     private var page: Info?
     
-   
     override func viewDidLoad() {
         super.viewDidLoad()
         

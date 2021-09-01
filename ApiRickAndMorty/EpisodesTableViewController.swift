@@ -17,14 +17,10 @@ class EpisodesTableViewController: UITableViewController {
 
     }
 
-    // MARK: - Table view data source
-
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
      
         return character.episode.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeCell", for: indexPath)
